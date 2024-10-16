@@ -62,7 +62,11 @@ func (c *Client) init(opts ...ClientOption) {
 		o(c)
 	}
 
-	c.endpoint, _ = url.Parse(c.url)
+	endpoint, err := url.Parse(c.url)
+	if err != nil {
+		panic(err)
+	}
+	c.endpoint = endpoint
 }
 
 func (c *Client) setIsConnected(isConnected bool) {
